@@ -1,0 +1,46 @@
+# Category keyword mappings for merchant classification
+# Format: "Category": [list of keywords to match]
+
+CATEGORIES = {
+    "Groceries": ["WEGMANS", "TRADER JOE", "H MART", "WHOLE FOODS", "WHOLEFDS", "MARUFUJI", "BODOS BAGELS", "COSTCO WHSE", "PAYPAL *COOKUNITYIN", "SQ *ROAMING STONE"],
+    
+    "Transportation": ["UBER", "LYFT", "TAXI", "PARKING", "MARTA", "MBTA", "E Z PASS", "EZPASSVA", "NYCT PAYGO", "SAFEWAY FUEL", "COSTCO GAS", "EXXONMOBIL", "OURISMAN", "LIMOUSINE WEB", "VENTRA MOBILE", "METRO", "7-ELEVEN", "VIRGINATLAI"],
+    
+    "Healthcare": ["HAIR STORY", "PHARMACY", "BE WELL PHARM", "CVS/PHARMACY", "QUESTHEALTH", "MED*VHC", "ENDOCRINOLOG"],
+    
+    "Gaming/TCG": ["DISCORD", "RIOT GAMES", "BESTBUY", "SP GAMING GIANT", "SENPAI'S CORNER"],
+    
+    "Pookie Purchase": ["ETSY", "UPS", "EDENFANTASYS", "SARANG SOCIETY", "ALLIANZ EVENT", "STUBHUB", "USPS", "TARGET"],
+    
+    "Clothing": ["UNIQLO", "REI", "BLOOMINGDALES", "URBAN OUTFITTERS", "Muji", "MARSHALLS", "ALLEN EDMONDS", "KINOKUNIYA", "RAG-O-RAMA", "SEPHORA"],
+    
+    "JPN2026": ["FAMILYMART", "SEVEN-ELEVEN", "GINZA", "BOOKOFF", "TAKASHIMAYA", "MOFUSAND", "DAISO", "SHIBUYA LOFT", "MUJIRUSHIRYOHIN", "D DONQUIJOTE", "KIDDYLAND", "HANDS SHINJUKU", "MS AKIHABARA", "MOBILE SUICA", "TRANSATEL", "JRC SMART", "COT*HTL", "MATSUMOTOKIYOSHI", "PARCO", "DAIMARU", "LALAPORT", "KYOTO", "SHINSAIBASHI", "KOREAN AIR", "OSAKA HARUKAS", "HEP FIVE", "CRYSTAL WORLD", "MOMOTARO JEANS", "SAKAI DENSKO", "GS25", "MYONGDONG", "STARFIELD COEX", "SHINSEGAE DUTY"],
+    
+    "Anime + Kpop": ["KINOKUNIYA", "GOODWILL", "BARNES & NOBLE"],
+    
+    "Rocks": ["PAYPAL *AMEROSE", "PAYPAL *MINERSKING"],
+    
+    "Fun": ["FANDANGO", "eBay", "BUC-EE'S", "TM *YOASOBI", "TM *TIFFANY", "TM *DOLLHOUSE", "SHORT PUMP"],
+    
+    "Vacation": ["COT*HTL", "SEATS.AERO", "BESTBUS", "DCA FOOD", "ART INST", "POP MART", "ROSCOES TAVERN", "TST* DORIAN", "PHOTOBOOTH", "DOG HAUS", "EXPEDIA", "FRONTIER", "UNITED", "PRINCE HOTELS", "CANDEO", "HINOMARUJIDOSHIYA"],
+    
+    "Fitness": ["SPORTROCK", "PureGym"],
+    
+    "Housing": ["IKEA", "STATE FARM INSURANCE", "THUMA"],
+    
+    "Eating Out": ["UMAI RAMEN", "TST*", "JMT KITCHEN", "ARMK CAPITAL", "RAMEN AND RICE", "CAPITAL ONE", "CAFE", "DUNKIN", "TACO BELL", "TACO ZOCALO", "CHICK-FIL-A", "CHINA WOK", "FLOUR BAKERY", "POTLUCK CAFE", "MOLLY TEA", "FELIPES TAQUERIA", "SQ *", "HEYTEA", "BON TEA", "SULMONA RESTAURANT", "SNACK*", "YUME GA ARUKA", "NEVER ON SUNDAY", "PERI PERI GRILL", "GOHAN", "CITY WINERY", "ARDEN'S GARDEN", "Sunday", "THAI PAPAYA", "TOUS LES JOURS", "STARBUCKS", "CORA COFFEE", "YAKITORIYA", "WAGYUYAKINIKU", "COSTCO", "BRESCA", "VITGOEL", "BIRDS EYE THAI", "BREEZE BAKERY", "POKI DC", "COFFEE", "JINZU", "TORITOSHI", "JR EAST", "COCOICHIBANYA", "KATSUGYUSANJO", "SHIBUYA", "WENDY'S", "DAIKOKU", "BOOKOFF", "HAMTON SOCIAL", "BRONSON BIER", "SHACK", "Hair of the Dog"],
+    
+    "Misc.": ["GOOGLE *YouTube", "APPLE.COM/BILL", "AMAZON MKTPL", "AMAZON PRIME", "AMAZON RETA", "Amazon", "TELECHARGE", "FREETAXUSA", "CAPITAL ONE CENTER", "WEB ANGELIKA", "GEORGIA TECH", "DEPARTMENT MOTOR", "GlobalE", "WALMART", "PARCHMENT", "SPOTIFY", "WM ", "Wedding Gift", "IRS", "WALGREENS", "DISCORD"],
+}
+
+def get_category(description):
+    """Determine category based on description by checking keyword matches."""
+    for category, keywords in CATEGORIES.items():
+        if any(keyword in description for keyword in keywords):
+            return category
+    
+    # Special cases
+    if "Fronting The Check" in description:
+        return "Fronting The Check"
+    
+    return ""
