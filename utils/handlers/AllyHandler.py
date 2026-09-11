@@ -1,6 +1,7 @@
 import csv
-from Categories import get_category
-from Utils import contains
+
+from utils.Categories import get_category
+from utils.Utils import contains
 
 class AllyHandler:
     """Handler for Ally Bank statements with categorized transactions."""

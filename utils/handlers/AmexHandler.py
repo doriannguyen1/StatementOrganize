@@ -1,5 +1,6 @@
 import csv
-from Categories import get_category
+
+from utils.Categories import get_category
 
 class AmexHandler:
     """Handler for Amex credit card statements."""

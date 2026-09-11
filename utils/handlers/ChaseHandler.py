@@ -1,5 +1,6 @@
 import csv
-from Categories import get_category
+
+from utils.Categories import get_category
 
 class ChaseHandler:
     """Handler for Chase credit card statements."""
@@ -37,7 +38,7 @@ class ChaseHandler:
         """Determine Chase card type from filename."""
         if "0611" in filename:
             return "Chase Sapphire Reserve"
-        elif "3673" in filename:
+        elif "3676" in filename:
             return "Chase Freedom Unlimited"
         elif "8495" in filename:
             return "Chase Sapphire Preferred"

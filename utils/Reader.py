@@ -2,11 +2,12 @@
 
 import csv
 import os
-from ChaseHandler import ChaseHandler
-from AmexHandler import AmexHandler
-from C1VentureHandler import C1VentureHandler
-from AllyHandler import AllyHandler
-from LegacyHandlers import C1Handler, BiltHandler
+
+from utils.handlers.AllyHandler import AllyHandler
+from utils.handlers.AmexHandler import AmexHandler
+from utils.handlers.C1VentureHandler import C1VentureHandler
+from utils.handlers.ChaseHandler import ChaseHandler
+from utils.handlers.LegacyHandlers import BiltHandler, C1Handler
 
 
 class Reader:

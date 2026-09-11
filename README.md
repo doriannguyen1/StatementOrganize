@@ -4,51 +4,60 @@ A Python utility that normalizes and organizes bank statement CSV files from mul
 
 ## Overview
 
-StatementOrganize processes CSV export files from various banks and credit card providers, standardizing their format by:
-- Removing unnecessary columns
-- Reorganizing column order for consistency
-- Adjusting amount signs to match a standard convention
-- Handling bank-specific formatting quirks
+StatementOrganize processes CSV export files from different banks and credit card providers, standardizing them by:
+- cleaning and normalizing transaction rows
+- applying bank-specific parsing rules
+- categorizing expenses and income where needed
+- writing the result to the output folder in a consistent structure
 
 ## Supported Banks/Cards
 
-- **Chase** - Credit cards and checking accounts
-- **Capital One (C1)** - Transaction downloads
-- **Bilt** - Credit card statements
-- **American Express (Amex)** - Activity reports
+- **Chase**
+- **Capital One (C1)**
+- **Bilt**
+- **American Express (Amex)**
+- **Ally**
 
 ## How to Use
 
-1. **Place input files** in the `input/` folder
-   - Files should be CSV exports from supported banks
-   - File names should contain the bank identifier (e.g., "Chase", "C1", "Bilt", "Amex", or "Activity" for Amex)
-
-2. **Run the application**
-   ```
+1. Place raw CSV files in the `input/` folder.
+2. Run the app from the project root:
+   ```bash
    python Main.py
    ```
+3. Cleaned CSV files will be written to the `output/` folder.
 
-3. **Retrieve output** from the `output/` folder
-   - Cleaned and normalized CSV files will be generated with the same filename
+## Current Project Structure
 
-## Project Structure
+- **Main.py** - project entry point
+- **README.md** - project documentation
+- **input/** - raw statement files
+- **output/** - processed statement files
+- **utils/** - shared utilities and processing logic
+  - `Reader.py` - routes files to the correct handler
+  - `Categories.py` - category keyword mappings
+  - `Helper.py` - legacy helper functions
+  - `Utils.py` - generic helpers like string contains checks
+  - `handlers/` - bank/card-specific handlers
+    - `ChaseHandler.py`
+    - `AmexHandler.py`
+    - `C1VentureHandler.py`
+    - `AllyHandler.py`
+    - `LegacyHandlers.py`
 
-- **Main.py** - Entry point that scans the input folder and processes all CSV files
-- **Reader.py** - Core file processing logic that handles different bank formats
-- **Helper.py** - Cleaning functions for each supported bank format
-- **input/** - Place your bank statement CSV files here
-- **output/** - Cleaned files are written here
+## Processing Logic
 
-## File Processing
-
-The application automatically detects the bank format based on the filename and applies the appropriate cleaning function:
-- Filenames containing "chase" → Uses Chase cleaning rules
-- Filenames containing "c1" or "transaction_download" → Uses Capital One cleaning rules
-- Filenames containing "bilt" → Uses Bilt cleaning rules
-- Filenames containing "amex" or "activity" → Uses Amex cleaning rules
+The app identifies the file type from the filename and routes it to the matching handler:
+- filenames containing "chase" → `ChaseHandler`
+- filenames containing "c1 venture", "venture", or "transaction_download" → `C1VentureHandler`
+- filenames containing "c1" → legacy `C1Handler`
+- filenames containing "bilt" → legacy `BiltHandler`
+- filenames containing "amex" or "activity" → `AmexHandler`
+- filenames containing "ally" or "transactions" → `AllyHandler`
 
 ## Notes
 
-- Original input files are not modified
-- Output files maintain the same filename as input files
-- Processing handles various CSV edge cases and skips malformed rows gracefully
+- Original input files are not overwritten.
+- Output files keep the same name as the source file.
+- Malformed or partial rows are skipped gracefully.
+- The code is organized into a dedicated `utils` package to keep the project easier to maintain.
